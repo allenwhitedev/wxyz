@@ -31,8 +31,12 @@ var app = require('./config/express')(db);
 // Bootstrap passport config
 require('./config/passport')();
 
+var PORT = 8000;
+
 // Start the app by listening on <port>
-app.listen(config.port);
+app.listen(PORT, () => {
+	console.log(chalk.green("Server listening on port " + PORT + "..."));
+});
 
 // Expose app
 exports = module.exports = app;
@@ -41,7 +45,7 @@ exports = module.exports = app;
 console.log('--');
 console.log(chalk.green(config.app.title + ' application started'));
 console.log(chalk.green('Environment:\t\t\t' + process.env.NODE_ENV));
-console.log(chalk.green('Port:\t\t\t\t' + config.port));
+console.log(chalk.green('Port:\t\t\t\t' + PORT));
 console.log(chalk.green('Database:\t\t\t' + config.db.uri));
 if (process.env.NODE_ENV === 'secure') {
 	console.log(chalk.green('HTTPs:\t\t\t\ton'));
